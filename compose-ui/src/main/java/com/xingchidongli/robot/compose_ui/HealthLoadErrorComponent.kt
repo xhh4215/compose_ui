@@ -43,32 +43,38 @@ fun HealthLoadErrorComponent(
     retryButtonHeight: Dp = 45.dp,
     retryButtonColor: Color,
     retryButtonCornerRadius: Dp = 32.dp,
-    @DrawableRes bgRes: Int,
+    @DrawableRes bgRes: Int=0,
     @DrawableRes iconRes: Int,
     retryAction: (() -> Unit) = {},
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .noRippleClickable {},// 拦截点击,
+            .noRippleClickable(),// 拦截点击,
         contentAlignment = Alignment.Center
     ) {
-        // 背景图
-        Image(
-            painter = painterResource(bgRes),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
-        )
+        if (bgRes!=0){
+            // 背景图
+            Image(
+                painter = painterResource(bgRes),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+        }
+
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Box(modifier = Modifier.size(210.dp)) {
-                Image(
-                    modifier = Modifier
-                        .width(210.dp)
-                        .height(180.dp),
-                    painter = painterResource(iconRes),
-                    contentDescription = null
-                )
+
+                    Image(
+                        modifier = Modifier
+                            .width(210.dp)
+                            .height(180.dp),
+                        painter = painterResource(iconRes),
+                        contentDescription = null
+                    )
+
+
                 Spacer(modifier = Modifier.height(30.dp))
                 Text(
                     text = errorMessage,

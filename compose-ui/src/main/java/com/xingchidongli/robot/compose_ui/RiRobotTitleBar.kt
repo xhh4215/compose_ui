@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -45,9 +46,9 @@ object RiRobotTitleBarFactory {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
                 modifier = Modifier
-                    .height(16.dp)
+                    .height(17.dp)
                     .wrapContentWidth(Alignment.Start)
-                    .noRippleClickable { backAction.invoke() },
+                    .noRippleClickable(onClick = { backAction.invoke() }),
                 tint = iconColor,
                 painter = painterResource(iconRes),
                 contentDescription = null,
@@ -56,7 +57,7 @@ object RiRobotTitleBarFactory {
             Text(
                 iconText,
                 style = titleTextStyle,
-                modifier = Modifier.noRippleClickable { backAction.invoke() },
+                modifier = Modifier.noRippleClickable({ backAction.invoke() }),
                 color = iconColor
             )
         }
@@ -64,29 +65,42 @@ object RiRobotTitleBarFactory {
     }
 
     @Composable
-    fun commonContentCompose(text: String) {
-        Text(text, style = riTitleBarTextStyle)
+    fun commonContentCompose(text: String, style: TextStyle = riTitleBarTextStyle) {
+        Text(text, style = style)
     }
 
     @Composable
-    fun commonTitleBar(backAction: () -> Unit, text: String, titleBarHeight: Dp = 50.dp, startPadding: Dp = 30.dp, endPadding: Dp = 30.dp) {
+    fun commonTitleBar(
+        iconRes: Int = R.drawable.ic_back,
+        iconText: String = stringResource(R.string.string_back),
+        iconColor: Color,
+        iconTextStyle: TextStyle = BackComposeStyle.backComposeTextStyle,
+        titleBarHeight: Dp = 50.dp,
+        startPadding: Dp = 30.dp,
+        endPadding: Dp = 30.dp,
+        title: String,
+        titleBarColor: Color = Color.Transparent,
+        titleTextStyle: TextStyle = BackComposeStyle.backComposeTextStyle,
+        backAction: () -> Unit,
+
+        ) {
         RiRobotComposeBar(
             startPadding = startPadding,
             endPadding = endPadding,
             showAction = false,
             modifier = Modifier
-                .background(Color.Transparent)
+                .background(titleBarColor)
                 .height(titleBarHeight)
                 .fillMaxWidth(),
             contentCompose = {
-                commonContentCompose(text)
+                commonContentCompose(title, titleTextStyle)
             },
             backCompose = {
                 commonBackCompose(
-                    iconRes = R.drawable.ic_back,
-                    iconColor = color_5aa,
-                    iconText = "返回",
-                    titleTextStyle = BackComposeStyle.backComposeTextStyle,
+                    iconRes = iconRes,
+                    iconColor = iconColor,
+                    iconText = iconText,
+                    titleTextStyle = iconTextStyle,
                     backAction = backAction,
                 )
             }
@@ -118,7 +132,7 @@ object RiRobotTitleBarFactory {
                 commonBackCompose(
                     iconRes = R.drawable.ic_back,
                     iconColor = color_5aa,
-                    iconText = "返回",
+                    iconText = stringResource(R.string.string_back),
                     titleTextStyle = BackComposeStyle.backComposeTextStyle,
                     backAction = backAction,
                 )
@@ -149,7 +163,7 @@ object RiRobotTitleBarFactory {
                 commonBackCompose(
                     iconRes = R.drawable.ic_back,
                     iconColor = color_5aa,
-                    iconText = "返回",
+                    iconText = stringResource(R.string.string_back),
                     titleTextStyle = BackComposeStyle.backComposeTextStyle,
                     backAction = backAction,
                 )

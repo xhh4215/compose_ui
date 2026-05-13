@@ -11,7 +11,7 @@ plugins {
 
 val gId = "com.xingchidongli"
 
-val ver = "0.1.1"
+val ver = "0.2.3"
 
 val aId = "compose-ui"
 

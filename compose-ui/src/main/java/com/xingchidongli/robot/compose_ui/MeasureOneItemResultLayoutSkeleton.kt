@@ -9,17 +9,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+
 @Composable
 fun MeasureOneItemResultLayoutSkeleton(
     userInfoComponent: @Composable () -> Unit,
     resultComponent: @Composable () -> Unit = {},
-    suggestComponent: @Composable () -> Unit = {}
+    suggestComponent: @Composable () -> Unit = {},
+    tipComponent: @Composable () -> Unit = {},
 ) {
     Row {
         Column(modifier = Modifier.weight(6f)) {
             userInfoComponent()
             Spacer(modifier = Modifier.size(15.dp))
-            resultComponent()
+            Box(modifier = Modifier.weight(1f)) {
+                resultComponent()
+            }
+            Spacer(modifier = Modifier.size(10.dp))
+            tipComponent()
         }
         Box(
             modifier = Modifier

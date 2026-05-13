@@ -86,9 +86,10 @@ fun ScrollerChooseMonthComponent(
                                 if (monthReport.lsSelect) chooseColor.copy(0.44f) else Color.Transparent,
                                 shape = RoundedCornerShape(5.dp)
                             )
-                            .noRippleClickable {
+                            .noRippleClickable(onClick = {
                                 onItemClickAction.invoke(monthReport.month)
-                            }) {
+                            })
+                    ) {
                         Text(
                             maxLines = 1,
                             textAlign = TextAlign.Center,
@@ -115,7 +116,7 @@ fun ScrollerChooseMonthComponent(
                     "${currentYear}年",
                     modifier = Modifier
                         .wrapContentSize()
-                        .noRippleClickable { onChooseYearClickAction.invoke() },
+                        .noRippleClickable( { onChooseYearClickAction.invoke() }),
                     fontWeight = FontWeight.W600,
                     fontSize = 16.sp,
                     color = yearTextColor

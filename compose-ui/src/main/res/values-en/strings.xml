@@ -1,4 +1,4 @@
 <resources>
     <string name="title_activity_main">主页面</string>
-    <string name="string_back">返回</string>
+    <string name="string_back">Back</string>
 </resources>

@@ -70,16 +70,22 @@ fun Modifier.safeClickable(debounceMillis: Long = 400L, action: () -> Unit): Mod
 
 }
 
+
 @Composable
-fun Modifier.noRippleClickable(onClick: () -> Unit): Modifier {
+fun Modifier.noRippleClickable(
+    onClick: () -> Unit = {},
+    enabled: Boolean = true,
+): Modifier {
     return this.then(
         Modifier.clickable(
             indication = null,   // ❌ 不使用波纹效果
             interactionSource = remember { MutableInteractionSource() }, // ❌ 没有“按压黑影”
+            enabled = enabled,
             onClick = onClick
         )
     )
 }
+
 //可复用的点击监听 Modifier
 fun Modifier.multiClickFor(
     clickCountTarget: Int,
